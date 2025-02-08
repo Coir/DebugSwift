@@ -42,6 +42,8 @@ final class NetworkViewController: BaseController, MainFeatureType {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.networkSearchWord = ""
+        viewModel.applyFilter()
         tableView.reloadData()
         addDeleteButton()
     }

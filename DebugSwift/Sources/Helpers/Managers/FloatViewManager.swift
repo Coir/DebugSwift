@@ -12,7 +12,7 @@ final class FloatViewManager: NSObject {
     static let shared = FloatViewManager()
 
     let ballView = FloatBallView()
-    let ballRedCancelView = BottomFloatView()
+//    let ballRedCancelView = BottomFloatView()
 
     private(set) var floatViewController: UIViewController?
 
@@ -78,14 +78,14 @@ final class FloatViewManager: NSObject {
 
 extension FloatViewManager {
     private func setup() {
-        ballRedCancelView.frame = .init(
-            x: DSFloatChat.screenWidth,
-            y: DSFloatChat.screenHeight,
-            width: DSFloatChat.bottomViewFloatWidth,
-            height: DSFloatChat.bottomViewFloatHeight
-        )
-        ballRedCancelView.type = BottomFloatViewType.red
-        WindowManager.window.addSubview(ballRedCancelView)
+//        ballRedCancelView.frame = .init(
+//            x: DSFloatChat.screenWidth,
+//            y: DSFloatChat.screenHeight,
+//            width: DSFloatChat.bottomViewFloatWidth,
+//            height: DSFloatChat.bottomViewFloatHeight
+//        )
+//        ballRedCancelView.type = BottomFloatViewType.red
+//        WindowManager.window.addSubview(ballRedCancelView)
 
         ballView.frame = DSFloatChat.ballRect
         ballView.delegate = self
@@ -119,67 +119,67 @@ extension FloatViewManager: UINavigationControllerDelegate {
 
 extension FloatViewManager: FloatViewDelegate {
     func floatViewBeginMove(floatView _: FloatBallView, point _: CGPoint) {
-        UIView.animate(
-            withDuration: 0.2,
-            animations: {
-                self.ballRedCancelView.frame = CGRect(
-                    x: DSFloatChat.screenWidth - DSFloatChat.bottomViewFloatWidth,
-                    y: DSFloatChat.screenHeight - DSFloatChat.bottomViewFloatHeight,
-                    width: DSFloatChat.bottomViewFloatWidth,
-                    height: DSFloatChat.bottomViewFloatHeight
-                )
-            }
-        ) { _ in
-        }
+//        UIView.animate(
+//            withDuration: 0.2,
+//            animations: {
+//                self.ballRedCancelView.frame = CGRect(
+//                    x: DSFloatChat.screenWidth - DSFloatChat.bottomViewFloatWidth,
+//                    y: DSFloatChat.screenHeight - DSFloatChat.bottomViewFloatHeight,
+//                    width: DSFloatChat.bottomViewFloatWidth,
+//                    height: DSFloatChat.bottomViewFloatHeight
+//                )
+//            }
+//        ) { _ in
+//        }
     }
 
     func floatViewMoved(floatView _: FloatBallView, point _: CGPoint) {
-        let transformBottomP = WindowManager.window.convert(
-            ballView.center,
-            to: ballRedCancelView
-        )
-
-        if transformBottomP.x > .zero, transformBottomP.y > .zero {
-            let arcCenter = CGPoint(
-                x: DSFloatChat.bottomViewFloatWidth,
-                y: DSFloatChat.bottomViewFloatHeight
-            )
-            let distance =
-                pow(transformBottomP.x - arcCenter.x, 2) + pow(transformBottomP.y - arcCenter.y, 2)
-            let onArc = pow(arcCenter.x, 2)
-
-            if distance <= onArc {
-                if !ballRedCancelView.insideBottomSelected {
-                    ballRedCancelView.insideBottomSelected = true
-                }
-            } else {
-                if ballRedCancelView.insideBottomSelected {
-                    ballRedCancelView.insideBottomSelected = false
-                }
-            }
-        } else {
-            if ballRedCancelView.insideBottomSelected {
-                ballRedCancelView.insideBottomSelected = false
-            }
-        }
+//        let transformBottomP = WindowManager.window.convert(
+//            ballView.center,
+//            to: ballRedCancelView
+//        )
+//
+//        if transformBottomP.x > .zero, transformBottomP.y > .zero {
+//            let arcCenter = CGPoint(
+//                x: DSFloatChat.bottomViewFloatWidth,
+//                y: DSFloatChat.bottomViewFloatHeight
+//            )
+//            let distance =
+//                pow(transformBottomP.x - arcCenter.x, 2) + pow(transformBottomP.y - arcCenter.y, 2)
+//            let onArc = pow(arcCenter.x, 2)
+//
+//            if distance <= onArc {
+//                if !ballRedCancelView.insideBottomSelected {
+//                    ballRedCancelView.insideBottomSelected = true
+//                }
+//            } else {
+//                if ballRedCancelView.insideBottomSelected {
+//                    ballRedCancelView.insideBottomSelected = false
+//                }
+//            }
+//        } else {
+//            if ballRedCancelView.insideBottomSelected {
+//                ballRedCancelView.insideBottomSelected = false
+//            }
+//        }
     }
 
     func floatViewCancelMove(floatView _: FloatBallView) {
-        if ballRedCancelView.insideBottomSelected {
-            ballView.show = false
-        }
-
-        UIView.animate(
-            withDuration: DSFloatChat.animationCancelMoveDuration,
-            animations: {
-                self.ballRedCancelView.frame = .init(
-                    x: DSFloatChat.screenWidth,
-                    y: DSFloatChat.screenHeight,
-                    width: DSFloatChat.bottomViewFloatWidth,
-                    height: DSFloatChat.bottomViewFloatHeight
-                )
-            }
-        ) { _ in
-        }
+//        if ballRedCancelView.insideBottomSelected {
+//            ballView.show = false
+//        }
+//
+//        UIView.animate(
+//            withDuration: DSFloatChat.animationCancelMoveDuration,
+//            animations: {
+//                self.ballRedCancelView.frame = .init(
+//                    x: DSFloatChat.screenWidth,
+//                    y: DSFloatChat.screenHeight,
+//                    width: DSFloatChat.bottomViewFloatWidth,
+//                    height: DSFloatChat.bottomViewFloatHeight
+//                )
+//            }
+//        ) { _ in
+//        }
     }
 }
